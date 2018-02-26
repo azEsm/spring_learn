@@ -9,8 +9,14 @@ import java.util.UUID;
  */
 public class RandomMessage implements Message {
 
+    private final String message;
+
+    public RandomMessage() {
+        message = UUID.randomUUID().toString();
+    }
+
     @Override
     public String value() {
-        return UUID.randomUUID().toString();
+        return message;
     }
 }
