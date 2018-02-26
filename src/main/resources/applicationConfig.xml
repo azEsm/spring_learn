@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="message" class="ru.bellintegrator.practice.spring.hello.HelloMessage"/>
+
+    <bean id="randomMessage" class="ru.bellintegrator.practice.spring.random.RandomMessage" scope="prototype"/>
+
+    <bean id="greetingService" class="ru.bellintegrator.practice.spring.hello.GreetingServiceImpl">
+        <constructor-arg ref="message"/>
+    </bean>
+
+    <bean id="randomGreetingService" class="ru.bellintegrator.practice.spring.random.RandomGreetingService">
+        <lookup-method name="randomMessage" bean="randomMessage"/>
+    </bean>
+
+</beans>

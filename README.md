@@ -1,1 +1,1 @@
-# spring_learn
+Пример простейшей конфигурации Spring Framework
