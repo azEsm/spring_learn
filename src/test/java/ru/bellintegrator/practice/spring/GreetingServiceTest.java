@@ -9,6 +9,10 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class GreetingServiceTest {
 
+    /**
+     * Объекты randomMessage и randomGreetingService не создаются, т.к. в конфигурации для них прописано lazy-init="true"
+     * и в этом тесте они не используются
+     */
     @Test
     public void greeting() {
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationConfig.xml");
@@ -46,5 +50,13 @@ public class GreetingServiceTest {
         Assert.assertEquals(firstHello, secondHello);
 
         context.close();
+    }
+
+    @Test
+    public void mixedConfigurationTest() {
+        ApplicationContext context = new ClassPathXmlApplicationContext("mixedConfig.xml");
+        GreetingService greetingService = context.getBean(GreetingService.class);
+
+        Assert.assertEquals("Hello", greetingService.hello());
     }
 }

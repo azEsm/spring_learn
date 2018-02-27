@@ -19,12 +19,14 @@
           class="ru.bellintegrator.practice.spring.random.RandomMessage"
           scope="prototype"
           init-method="init"
-          destroy-method="destroy"/>
+          destroy-method="destroy"
+          lazy-init="true"/>
 
     <bean id="randomGreetingService"
           class="ru.bellintegrator.practice.spring.random.RandomGreetingService"
           init-method="init"
-          destroy-method="destroy">
+          destroy-method="destroy"
+          lazy-init="true">
         <lookup-method name="randomMessage" bean="randomMessage"/>
     </bean>
 
