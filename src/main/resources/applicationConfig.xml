@@ -3,15 +3,28 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="message" class="ru.bellintegrator.practice.spring.hello.HelloMessage"/>
+    <bean id="message"
+          class="ru.bellintegrator.practice.spring.hello.HelloMessage"
+          init-method="init"
+          destroy-method="destroy"/>
 
-    <bean id="randomMessage" class="ru.bellintegrator.practice.spring.random.RandomMessage" scope="prototype"/>
-
-    <bean id="greetingService" class="ru.bellintegrator.practice.spring.hello.GreetingServiceImpl">
+    <bean id="greetingService"
+          class="ru.bellintegrator.practice.spring.hello.GreetingServiceImpl"
+          init-method="init"
+          destroy-method="destroy">
         <constructor-arg ref="message"/>
     </bean>
 
-    <bean id="randomGreetingService" class="ru.bellintegrator.practice.spring.random.RandomGreetingService">
+    <bean id="randomMessage"
+          class="ru.bellintegrator.practice.spring.random.RandomMessage"
+          scope="prototype"
+          init-method="init"
+          destroy-method="destroy"/>
+
+    <bean id="randomGreetingService"
+          class="ru.bellintegrator.practice.spring.random.RandomGreetingService"
+          init-method="init"
+          destroy-method="destroy">
         <lookup-method name="randomMessage" bean="randomMessage"/>
     </bean>
 

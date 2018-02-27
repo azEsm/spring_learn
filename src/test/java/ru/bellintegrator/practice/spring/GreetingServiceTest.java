@@ -3,6 +3,7 @@ package ru.bellintegrator.practice.spring;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -30,10 +31,12 @@ public class GreetingServiceTest {
         Assert.assertNotEquals(firstHello, secondHello);
     }
 
-
+    /**
+     * В логах можно увидеть, что PreDestroy метод вызывается только у GreetingServiceImpl
+     */
     @Test
     public void prototypeInSingletonFailTest() {
-        ApplicationContext context = new AnnotationConfigApplicationContext(ApplicationConfig.class);
+        ConfigurableApplicationContext context = new AnnotationConfigApplicationContext(ApplicationConfig.class);
 
         GreetingService greetingService = context.getBean(GreetingService.class);
 
@@ -41,5 +44,7 @@ public class GreetingServiceTest {
         String secondHello = greetingService.hello();
 
         Assert.assertEquals(firstHello, secondHello);
+
+        context.close();
     }
 }
