@@ -52,6 +52,27 @@ public class GreetingServiceTest {
         context.close();
     }
 
+    /**
+     * Если в конфигурации prototype-бина прописать параметр proxyMode,
+     * то при каждом обращении к greetingService формируется новое случайное сообщение.
+     * Это происходит из-за того, что в поле message в GreetingService будет записан proxy-объект, который будет
+     */
+    @Test
+    public void prototypeInSingletonProxyTest() {
+        ConfigurableApplicationContext context = new AnnotationConfigApplicationContext(
+                PrototypeInSingletonProxyConfig.class
+        );
+
+        GreetingService greetingService = context.getBean(GreetingService.class);
+
+        String firstHello = greetingService.hello();
+        String secondHello = greetingService.hello();
+
+        Assert.assertNotEquals(firstHello, secondHello);
+
+        context.close();
+    }
+
     @Test
     public void mixedConfigurationTest() {
         ApplicationContext context = new ClassPathXmlApplicationContext("mixedConfig.xml");
